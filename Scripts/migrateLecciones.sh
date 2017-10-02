@@ -12,7 +12,7 @@ dbname=ppl
 user="root"
 password=$1
 path="/var/lib/mysql-files/"
-pathCSV="../../CSV/$table.csv"
+pathCSV="../CSV/$table.csv"
 #Campos que se obtendrán
 fields="_id,estado,tiempoEstimado,puntaje,tipo,codigo,creador,paralelo,fechaInicio,nombre"
 

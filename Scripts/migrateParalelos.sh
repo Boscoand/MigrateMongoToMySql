@@ -12,7 +12,7 @@ dbname=ppl
 user="root"
 password=$1
 path="/var/lib/mysql-files/"
-pathCSV="../../CSV/$table.csv"
+pathCSV="../CSV/$table.csv"
 fields="_id,nombre,codigo,anio,termino"
 
 mongoexport --db $dbname --collection $collection --type=csv --fields $fields --out $pathCSV;

@@ -17,3 +17,5 @@ pathCSV="../CSV/*"
 ./migrateLecciones.sh $password
 
 rm $pathCSV
+
+#sudo chown -R boscoand Documents/Pasantias/ppl/MigrateMongoToMySql/*
