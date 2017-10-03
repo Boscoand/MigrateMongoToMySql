@@ -14,7 +14,7 @@ table="grupos"
 
 dbname=ppl
 user="root"
-password=$1
+config=$1
 path="/var/lib/mysql-files/"
 pathCSV="../CSV/$table.csv"
 fields="_id,grupos"
@@ -22,15 +22,15 @@ fields="_id,grupos"
 mongoexport --db $dbname --collection $collection --type=csv --fields $fields --out $pathCSV;
 
 #Se crea procedimiento almacenado para actualizar el paralelo_id
-mysql -u root -p$password ppl -e "delimiter //
-									create procedure paralelo_id(in paralelo_id varchar(50))
-									begin
-										update $table
-										set paralelo_id = (select id from paralelos where idMongo = paralelo_id)
-										ORDER BY id DESC
-										LIMIT 1;
-									end //
-									delimiter ;"
+mysql --defaults-extra-file=$config ppl -e "delimiter //
+												create procedure paralelo_id(in paralelo_id varchar(50))
+												begin
+													update $table
+													set paralelo_id = (select id from paralelos where idMongo = paralelo_id)
+													ORDER BY id DESC
+													LIMIT 1;
+												end //
+												delimiter ;"
 
 #Función exclusiva para manejar formato que devuelve mongoexport en "grupos"
 #col1 = _id (id de paralelo al que pertenecen los grupos)
@@ -51,12 +51,12 @@ do
 		#Se valida que el grupo sea válido y tenga información
 		if [[ $nombreGrupo != Mongo* ]]; then
 			#Se ingresa registro en mysql
-			mysql -u root -p$password ppl -e "INSERT INTO $table(idMongo,nombre)
-		                  						values('$grupo_idMongo','$nombreGrupo');"
-			mysql -u root -p$password ppl -e "call paralelo_id('$col1');"
+			mysql --defaults-extra-file=$config ppl -e "INSERT INTO $table(idMongo,nombre)
+		                  									values('$grupo_idMongo','$nombreGrupo');"
+			mysql --defaults-extra-file=$config ppl -e "call paralelo_id('$col1');"
 		fi
 
 	done
 done < $pathCSV
 
-mysql -u root -p$password ppl -e "drop procedure paralelo_id"
+mysql --defaults-extra-file=$config ppl -e "drop procedure paralelo_id"

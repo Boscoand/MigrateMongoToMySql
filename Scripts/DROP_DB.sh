@@ -5,10 +5,17 @@
 #		@boscoand           #
 #############################
 
-password=$1
+user=$1
+password=$2
+config="./config.cnf"
 
-mysql -u root -p$password ppl -e "drop database ppl"
+echo "[client]
+user=$user
+password=$password
+host=localhost
+" > $config
 
-#DROP_DB.sh
-#CREATE_DB_TABLES.sh
-#MIGRATE.sh
+echo -e "\e[41mBorrando base de datos \"ppl\"\e[49m"
+mysql --defaults-extra-file=$config ppl -e "drop database ppl"
+
+rm $config

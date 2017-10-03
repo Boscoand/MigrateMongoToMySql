@@ -8,38 +8,38 @@
 collection="lecciones"
 table="lecciones"
 
-dbname=ppl
-user="root"
-password=$1
+config=$1
+db_name=$2
+
 path="/var/lib/mysql-files/"
 pathCSV="../CSV/$table.csv"
 #Campos que se obtendrán
 fields="_id,estado,tiempoEstimado,puntaje,tipo,codigo,creador,paralelo,fechaInicio,nombre"
 
 # #Procedimiento para obtener profesor_id
-mysql -u root -p$password ppl -e "delimiter //
-									create procedure profesor_id(in idMongo1 varchar(50))
-									begin
-										update $table
-										set profesor_id = (select id from profesores where idMongo = idMongo1)
-										ORDER BY id DESC
-										LIMIT 1;
-									end //
-									delimiter ;"
+mysql --defaults-extra-file=$config $db_name -e "delimiter //
+													create procedure profesor_id(in idMongo1 varchar(50))
+													begin
+														update $table
+														set profesor_id = (select id from profesores where idMongo = idMongo1)
+														ORDER BY id DESC
+														LIMIT 1;
+													end //
+													delimiter ;"
 
 # #Procedimiento para obtener paralelo_id									
-mysql -u root -p$password ppl -e "delimiter //
-									create procedure paralelo_id(in idMongo1 varchar(50))
-									begin
-										update $table
-										set paralelo_id = (select id from paralelos where idMongo = idMongo1)
-										ORDER BY id DESC
-										LIMIT 1;
-									end //
-									delimiter ;"
+mysql --defaults-extra-file=$config $db_name -e "delimiter //
+												create procedure paralelo_id(in idMongo1 varchar(50))
+												begin
+													update $table
+													set paralelo_id = (select id from paralelos where idMongo = idMongo1)
+													ORDER BY id DESC
+													LIMIT 1;
+												end //
+												delimiter ;"
 
 #Se exporta información de Mongo
-mongoexport --db $dbname --collection $collection --type=csv --fields $fields --out $pathCSV;
+mongoexport --db $db_name --collection $collection --type=csv --fields $fields --out $pathCSV;
 
 
 # Fuente: https://stackoverflow.com/questions/8940352/how-to-handle-commas-within-a-csv-file-being-read-by-bash-script
@@ -66,14 +66,15 @@ do
 			fechaInicio="2000-01-01"
 		fi
 		#Copia de información en mysql
-		mysql -u root -p$password ppl -e "INSERT INTO $table(idMongo,estado,tiempo_estimado,puntaje,tipo,codigo,fecha_evaluacion,nombre)
+		mysql --defaults-extra-file=$config $db_name -e "INSERT INTO $table(idMongo,estado,tiempo_estimado,puntaje,tipo,codigo,fecha_evaluacion,nombre)
 			                  			  values('$_id','$estado','$tiempoEstimado','$puntaje','$tipo','$codigo','$fechaInicio','$nombre');"
-		mysql -u root -p$password ppl -e "call paralelo_id('$paralelo');"		                  			  
-		mysql -u root -p$password ppl -e "call profesor_id('$creador');"
+		mysql --defaults-extra-file=$config $db_name -e "call paralelo_id('$paralelo');"		                  			  
+		mysql --defaults-extra-file=$config $db_name -e "call profesor_id('$creador');"
 	fi
 	let cont=cont+1
 done < tmp.txt
 
-mysql -u root -p$password ppl -e "drop procedure paralelo_id"
-mysql -u root -p$password ppl -e "drop procedure profesor_id"
+mysql --defaults-extra-file=$config $db_name -e "drop procedure paralelo_id"
+mysql --defaults-extra-file=$config $db_name -e "drop procedure profesor_id"
+
 rm tmp.txt
