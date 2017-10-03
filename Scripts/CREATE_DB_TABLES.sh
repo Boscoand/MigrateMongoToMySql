@@ -5,6 +5,9 @@
 #		@boscoand           #
 #############################
 
+#FUNCIONALIDAD:
+#Crea la base de datos ppl y sus respectivas tablas
+
 user=$1
 password=$2
 config="./config.cnf"

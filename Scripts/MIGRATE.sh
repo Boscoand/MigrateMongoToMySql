@@ -4,6 +4,10 @@
 #Autor: Bosco Andrade Bravo #
 #		@boscoand           #
 #############################
+
+#FUNCIONALIDAD:
+#Migra la información de mongo a mysql 
+
 #https://stackoverflow.com/questions/20751352/suppress-warning-messages-using-mysql-from-within-terminal-but-password-written/22933056#22933056
 
 user=$1
@@ -36,4 +40,9 @@ echo -e "\e[41mMigrando \"Lecciones\"\e[49m"
 rm $pathCSV
 rm $config
 
-#sudo chown -R boscoand Documents/Pasantias/ppl/MigrateMongoToMySql/*
+#Corregir problema: no se puede guardar datos desde subl
+	#sudo chown -R boscoand Documents/Pasantias/ppl/MigrateMongoToMySql/*
+#Restaurar base de datos en mongo
+	#mongorestore --db ppl <rutadb>
+#Error “Data too long for column” - why?
+	#install awk: sudo apt-get install gawk

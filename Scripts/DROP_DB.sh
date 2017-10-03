@@ -5,6 +5,9 @@
 #		@boscoand           #
 #############################
 
+#FUNCIONALIDAD:
+#Borra la base de datos ppl
+
 user=$1
 password=$2
 config="./config.cnf"
