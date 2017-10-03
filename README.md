@@ -3,11 +3,11 @@
 > Ubicarse en la carpeta de scripts: cd Scripts/
 
 > Ejecutar lo siguiente como usuario root (sudo -s):
-    > ./CREATE_DB_TABLES.sh <passwordDataBaseMySql>   #Crea base de datos y tablas respectivas
-    > ./MIGRATE.sh <passwordDataBaseMySql>            #Migra la información de mongo a mysql
+    > ./CREATE_DB_TABLES.sh <userMySql> <passwordDataBaseMySql>   #Crea base de datos y tablas respectivas
+    > ./MIGRATE.sh <userMySql> <passwordDataBaseMySql>            #Migra la información de mongo a mysql
     
 > Asegurarse que no exista una base de datos llamada ppl en su base de datos. Si existe, ejecutar:
-    >  ./DROP_DB.sh <passwordDataBaseMySql>           #Borra base de datos ppl
+    >  ./DROP_DB.sh <userMySql> <passwordDataBaseMySql>           #Borra base de datos ppl
 ```
    
 # Funcionalidad
