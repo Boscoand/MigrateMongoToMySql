@@ -27,5 +27,6 @@ mysql --defaults-extra-file=$config $db_name -e "delete from semestres where id 
 mysql --defaults-extra-file=$config $db_name -e "delete from capitulos where id > 0"
 mysql --defaults-extra-file=$config $db_name -e "delete from materias where id > 0"
 mysql --defaults-extra-file=$config $db_name -e "delete from profesores where id > 0"
+mysql --defaults-extra-file=$config $db_name -e "delete from estudiantes where id > 0"
 
 rm $config

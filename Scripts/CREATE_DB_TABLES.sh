@@ -1,8 +1,12 @@
 #!/bin/bash
 
 #############################
-#Autor: Bosco Andrade Bravo #
-#		@boscoand           #
+#Autores: 					#
+#->   Bosco Andrade Bravo   #
+#		@boscoand     		#
+#							#
+#->   Jaminson Riascos M    #
+#	  riascos@espol.edu.ec  #
 #############################
 
 #FUNCIONALIDAD:
@@ -81,7 +85,7 @@ mysql --defaults-extra-file=$config ppl -e "create table lecciones(
 												idMongo varchar(50),
 												nombre varchar(100),
 												estado varchar(50),
-												tiempo_estimado double,
+												tiempo_estimado int,
 												puntaje double, 
 												tipo varchar(50),
 												codigo varchar(50),
@@ -91,6 +95,82 @@ mysql --defaults-extra-file=$config ppl -e "create table lecciones(
 												primary key (id),
 												foreign key (profesor_id) references profesores(id),
 												foreign key (paralelo_id) references paralelos(id)
-											);"								
+											);"	
+
+
+mysql --defaults-extra-file=$config ppl -e "create table estudiantes(
+												id int auto_increment,
+												idMongo varchar(50),
+												nombres varchar(100),
+												apellidos varchar(100),
+												correo varchar(50),
+												matricula varchar(10),
+												foto_url varchar(200), 
+												grupo_id int,
+												paralelo_id int,
+												primary key (id),
+												foreign key (grupo_id) references grupos(id),
+												foreign key (paralelo_id) references paralelos(id)
+											);"			
+
+
+
+mysql --defaults-extra-file=$config ppl -e "create table preguntas(
+												id int auto_increment,
+												idMongo varchar(50),
+												profesor_id int,
+												nombre varchar(20),
+												tipo_leccion varchar(20),
+												tipo_pregunta varchar(20),
+												capitulo_id int, 
+												tiempo_estimado int,
+												descripcion varchar(1000),
+												puntaje double,
+												pregunta_raiz int,
+												primary key (id),
+												foreign key (profesor_id) references profesores(id),
+												foreign key (capitulo_id) references capitulos(id),
+												foreign key (pregunta_raiz) references preguntas(id)
+											);"	
+
+
+mysql --defaults-extra-file=$config ppl -e "create table preguntas_lecciones(
+												id int auto_increment,
+												idMongo varchar(50),
+												estudiante_id int,
+												pregunta_id int,
+												leccion_id int,
+												primary key (id),
+												foreign key (estudiante_id) references estudiantes(id),
+												foreign key (pregunta_id) references preguntas(id),
+												foreign key (leccion_id) references lecciones(id)
+											);"	
+
+mysql --defaults-extra-file=$config ppl -e "create table respuestas(
+												id int auto_increment,
+												idMongo varchar(50),
+												estudiante_id int,
+												pregunta_leccion_id int,
+												respuesta varchar(500),
+												calificacion double,
+												feedback varchar(500), 
+												imagen_url varchar(200),
+												leccion_id int,
+												primary key (id),
+												foreign key (estudiante_id) references estudiantes(id),
+												foreign key (leccion_id) references lecciones(id),
+												foreign key (pregunta_leccion_id) references preguntas_lecciones(id)
+											);"			
+
+mysql --defaults-extra-file=$config ppl -e "create table profesor_paralelos(
+												id int auto_increment,
+												idMongo varchar(50),
+												paralelo_id int,
+												profesor_id int,
+												grado_responsabilidad int,
+												primary key (id),
+												foreign key (paralelo_id) references paralelos(id),
+												foreign key (profesor_id) references profesores(id)
+											);"					
 
 rm $config
