@@ -42,16 +42,14 @@ while IFS="☺" read -r _id nombres apellidos correo matricula
 do
 	if [ $cont -gt 0 ] 
 	then
-		#Copia de información en mysql
-		
 		#Obtengo el id del grupo
-		resultado=`mongo ppl --eval "db.grupos.find({\"estudiantes\":{ \"\$all\": [\"$_id\"]}},{"_id":1});"`
-		grupo_id=$( echo $resultado | cut -d '"' -f8 )
+		resultado=$(mongo ppl --eval "db.grupos.find({\"estudiantes\":{ \"\$all\": [\"$_id\"]}},{\"_id\":1});")
+		#La función cut, corta el string hasta el " y luego selecciona el cuarto campo del string.
+		grupo_id=$(echo $resultado | cut -d '"' -f4)
 		echo -e "\e[41m$grupo_id"
 		
-		
-		#mysql --defaults-extra-file=$config $db_name -e "INSERT INTO $table(idMongo,nombres,apellidos,correo,matricula,foto_url,grupo_id)
-		#	                  			  values('$_id','$nombres','$apellidos','$correo','$matricula',NULL,'$grupo_id');"
+		# mysql --defaults-extra-file=$config $db_name -e "INSERT INTO $table(idMongo,nombres,apellidos,correo,matricula,foto_url,grupo_id)
+		# 	                  			  values('$_id','$nombres','$apellidos','$correo','$matricula',NULL,'$grupo_id');"
 
 	fi
 	let cont=cont+1
@@ -60,6 +58,6 @@ done < tmp.txt
 mysql --defaults-extra-file=$config $db_name -e "drop procedure paralelo_id"
 mysql --defaults-extra-file=$config $db_name -e "drop procedure profesor_id"
 
-rm tmp.txt
+# rm tmp.txt
 
 
