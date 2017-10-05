@@ -48,12 +48,10 @@ do
 		resultado=`mongo ppl --eval "db.grupos.find({\"estudiantes\":{ \"\$all\": [\"$_id\"]}},{"_id":1});"`
 		grupo_id=$( echo $resultado | cut -d '"' -f8 )
 		echo -e "\e[41m$grupo_id"
-		if [[ $nombreGrupo != Mongo* ]]; then
-			#Se ingresa registro en mysql
+		
 		
 		#mysql --defaults-extra-file=$config $db_name -e "INSERT INTO $table(idMongo,nombres,apellidos,correo,matricula,foto_url,grupo_id)
 		#	                  			  values('$_id','$nombres','$apellidos','$correo','$matricula',NULL,'$grupo_id');"
-		fi
 
 	fi
 	let cont=cont+1
