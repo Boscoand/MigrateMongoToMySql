@@ -23,19 +23,19 @@ host=localhost
 " > $config
 
 echo -e "\e[41mMigrando \"Profesores\"\e[49m"
-#./migrateProfesores.sh $config $db_name
+./migrateProfesores.sh $config $db_name
 echo -e "\e[41mMigrando \"Materias\"\e[49m"
-#./migrateMaterias.sh $config $db_name
+./migrateMaterias.sh $config $db_name
 echo -e "\e[41mMigrando \"Capitulos\"\e[49m"
-#./migrateCapitulos.sh $config $db_name
+./migrateCapitulos.sh $config $db_name
 echo -e "\e[41mMigrando \"Semestres\"\e[49m"
-#./migrateSemestres.sh $config $db_name
+./migrateSemestres.sh $config $db_name
 echo -e "\e[41mMigrando \"Paralelos\"\e[49m"
-#./migrateParalelos.sh $config $db_name
+./migrateParalelos.sh $config $db_name
 echo -e "\e[41mMigrando \"Grupos\"\e[49m"
-#./migrateGrupos.sh $config $db_name
+./migrateGrupos.sh $config $db_name
 echo -e "\e[41mMigrando \"Lecciones\"\e[49m"
-#./migrateLecciones.sh $config $db_name
+./migrateLecciones.sh $config $db_name
 
 echo -e "\e[41mMigrando \"Estudiantes\"\e[49m"
 ./migrateEstudiantes.sh $config $db_name
