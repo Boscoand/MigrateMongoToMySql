@@ -36,9 +36,10 @@ echo -e "\e[41mMigrando \"Grupos\"\e[49m"
 ./migrateGrupos.sh $config $db_name
 echo -e "\e[41mMigrando \"Lecciones\"\e[49m"
 ./migrateLecciones.sh $config $db_name
-
 echo -e "\e[41mMigrando \"Estudiantes\"\e[49m"
 ./migrateEstudiantes.sh $config $db_name
+echo -e "\e[41mMigrando \"Preguntas\"\e[49m"
+./migratePreguntas.sh $config $db_name
 
 rm $pathCSV
 rm $config

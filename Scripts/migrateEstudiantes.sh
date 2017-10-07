@@ -63,6 +63,8 @@ do
 		
 		#echo  -e "$paralelo_id_sql"
 
+
+		#guardo en base de datos sql
 		mysql --defaults-extra-file=$config $db_name -e "INSERT INTO $table(idMongo,nombres,apellidos,correo,matricula,foto_url,grupo_id,paralelo_id)
 			                  			  values('$_id','$nombres','$apellidos','$correo','$matricula',NULL,'$grupo_id_sql','$paralelo_id_sql');"
 
