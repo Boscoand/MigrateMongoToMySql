@@ -139,7 +139,6 @@ mysql --defaults-extra-file=$config ppl -e "create table preguntas(
 
 mysql --defaults-extra-file=$config ppl -e "create table preguntas_lecciones(
 												id int auto_increment,
-												idMongo varchar(50) not null,
 												pregunta_id int not null,
 												leccion_id int not null,
 												primary key (id),
