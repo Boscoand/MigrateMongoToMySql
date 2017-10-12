@@ -48,7 +48,7 @@ echo -e "\e[41mMigrando \"Preguntas\"\e[49m"
 echo -e "\e[41mMigrando \"Preguntas_Lecciones\"\e[49m"
 ./migratePreguntasLecciones.sh $config $db_name
 echo -e "\e[41mMigrando \"Respuestas\"\e[49m"
-#./migrateRespuestas.sh $config $db_name
+./migrateRespuestas.sh $config $db_name
 echo -e "\e[41mMigrando \"ProfesoresParalelos\"\e[49m"
 ./migrateProfesoresParalelos.sh $config $db_name
 

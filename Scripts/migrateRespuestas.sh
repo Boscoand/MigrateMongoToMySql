@@ -35,7 +35,8 @@ do
 
   #Obtengo la respuesta del estudiante
   respuesta=$(echo $linea | jq '.respuesta')
-  respuesta=$( echo $respuesta | tr -d "\"")
+  respuesta=$( echo $respuesta | tr -d "\"'")
+  
 
   #Obtengo la calificacion del estudiante
   calificacion=$(echo $linea | jq '.calificacion')
@@ -43,7 +44,7 @@ do
 
   #Obtengo el feedback del estudiante
   feedback=$(echo $linea | jq '.feedback')
-  feedback=$( echo $feedback | tr -d "\"")
+  feedback=$( echo $feedback | tr -d "\"'")
 
   #Obtengo el id_mongo de una leccion por iteracion
   leccion_id_mongo=$(echo $linea | jq '.leccion')
