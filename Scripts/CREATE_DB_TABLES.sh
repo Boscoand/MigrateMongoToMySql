@@ -164,7 +164,6 @@ mysql --defaults-extra-file=$config ppl -e "create table respuestas(
 
 mysql --defaults-extra-file=$config ppl -e "create table profesor_paralelos(
 												id int auto_increment,
-												idMongo varchar(50) not null,
 												paralelo_id int not null,
 												profesor_id int not null,
 												grado_responsabilidad int,

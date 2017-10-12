@@ -1,8 +1,12 @@
 #!/bin/bash
 
 #############################
-#Autor: Bosco Andrade Bravo #
-#		@boscoand           #
+#Autores: 					#
+#->   Bosco Andrade Bravo   #
+#		@boscoand     		#
+#							#
+#->   Jaminson Riascos M    #
+#	  riascos@espol.edu.ec  #
 #############################
 
 #FUNCIONALIDAD:
@@ -14,6 +18,7 @@ user=$1
 password=$2
 config="./config.cnf"
 pathCSV="../CSV/*"
+pathJSON="../JSON/*"
 db_name="ppl"
 
 echo "[client]
@@ -42,10 +47,15 @@ echo -e "\e[41mMigrando \"Preguntas\"\e[49m"
 ./migratePreguntas.sh $config $db_name
 echo -e "\e[41mMigrando \"Preguntas_Lecciones\"\e[49m"
 ./migratePreguntasLecciones.sh $config $db_name
+echo -e "\e[41mMigrando \"Respuestas\"\e[49m"
+#./migrateRespuestas.sh $config $db_name
+echo -e "\e[41mMigrando \"ProfesoresParalelos\"\e[49m"
+./migrateProfesoresParalelos.sh $config $db_name
 
 
 rm $pathCSV
 rm $config
+rm $pathJSON
 
 #Corregir problema: no se puede guardar datos desde subl
 	#sudo chown -R boscoand Documents/Pasantias/ppl/MigrateMongoToMySql/*

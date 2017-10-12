@@ -16,7 +16,7 @@ db_name=$2
 user="root"
 
 path="/var/lib/mysql-files/"
-pathCSV="../CSV/$table.json"
+pathCSV="../JSON/$table.json"
 #Campos que se obtendrán
 fields="_id,preguntas"
 

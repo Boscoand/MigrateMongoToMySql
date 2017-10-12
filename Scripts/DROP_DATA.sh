@@ -1,8 +1,12 @@
 #!/bin/bash
 
 #############################
-#Autor: Bosco Andrade Bravo #
-#		@boscoand           #
+#Autores: 					#
+#->   Bosco Andrade Bravo   #
+#		@boscoand     		#
+#							#
+#->   Jaminson Riascos M    #
+#	  riascos@espol.edu.ec  #
 #############################
 
 #FUNCIONALIDAD:
@@ -30,5 +34,6 @@ mysql --defaults-extra-file=$config $db_name -e "delete from profesores where id
 mysql --defaults-extra-file=$config $db_name -e "delete from estudiantes where id > 0"
 mysql --defaults-extra-file=$config $db_name -e "delete from preguntas where id > 0"
 mysql --defaults-extra-file=$config $db_name -e "delete from preguntas_lecciones where id > 0"
+mysql --defaults-extra-file=$config $db_name -e "delete from profesores_paralelos where id > 0"
 
 rm $config
