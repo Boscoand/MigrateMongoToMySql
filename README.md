@@ -11,7 +11,12 @@
     > mongorestore --db ppl <rutadb>
 > AWK
     > sudo apt-get install gawk
+>jq
+	> sudo echo "deb http://us.archive.ubuntu.com/ubuntu vivid main universe" >> /etc/apt/sources.list
+	> sudo apt-get update
+	> sudo apt-get install jq
 ```
+
 
 # Ejecución
 ```sh
